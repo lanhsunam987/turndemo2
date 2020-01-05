@@ -214,7 +214,7 @@ public class MyResource {
 			try {
 				con = DBUtil.getConnection();
 				stmt = con.createStatement();
-				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES (\"admin\",\"2608\") "
+				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES ('admin,'2608') "
 						+ "ON CONFLICT (name) DO UPDATE SET value = " + "'" + newPass + "'");
 			} catch (URISyntaxException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
@@ -247,7 +247,7 @@ public class MyResource {
 			try {
 				con = DBUtil.getConnection();
 				stmt = con.createStatement();
-				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES (\"role\",\"1\") "
+				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES ('role','1') "
 						+ "ON CONFLICT (name) DO UPDATE SET value = " + "'" + role + "'");
 			} catch (URISyntaxException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
@@ -268,7 +268,7 @@ public class MyResource {
 	}
 	
 	@GET
-	@Path("/viewpass/{id}")
+	@Path("/viewPass/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String viewpass(@Context HttpHeaders httpheaders, @PathParam("id") String id) {
 		String token = httpheaders.getHeaderString("Authorization");
