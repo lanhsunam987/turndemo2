@@ -294,9 +294,9 @@ public class MyResource {
 			String name = "";
 			while (rs.next()) {
 				name = rs.getString("name");
-				if(name.equals("pass")) {
+				if(name.equals("admin")) {
 					seting.setPass(rs.getString("value"));
-				} else if ((name.equals("secu")) ) {
+				} else if ((name.equals("role")) ) {
 					seting.setSecurity(rs.getString("value"));
 				}
 			}
