@@ -186,7 +186,7 @@ public class MyResource {
 		final StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
 		final String username = tokenizer.nextToken();
 		final String password = tokenizer.nextToken();
-		if(seting.getPass().isEmpty()) {
+		if(seting.getPass() == null || seting.getPass().isEmpty()) {
 			getSetting();
 		}
 		if (("admin".equals(username) && seting.getPass().equals(password))
@@ -933,7 +933,7 @@ public class MyResource {
 
 	private String buildJson(ArrayList<ArrayList<Employee>> employee, int checkL, boolean search) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-		if(seting.getSecurity().isEmpty()) {
+		if(seting.getSecurity() == null || seting.getSecurity().isEmpty()) {
 			getSetting();
 		}
 		// System.out.println("\nEmployee Table Details:");
