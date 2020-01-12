@@ -29,7 +29,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.internal.util.Base64;
-import org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -50,7 +49,7 @@ public class MyResource {
 	ArrayList<ArrayList<Employee>> arrOfArrEmployee = new ArrayList<ArrayList<Employee>>();
 	Setting seting = new Setting();
 	public static final int STEP_TURN = 20;
-	public static String username;
+//	public static String username;
 	public static String password;
 
 	// String strDateFormat = "yy:MM:dd";
@@ -216,6 +215,8 @@ public class MyResource {
 				stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES ('admin','2608') "
 						+ "ON CONFLICT (name) DO UPDATE SET value = " + "'" + newPass + "'");
+				
+				seting.setPass(newPass);
 			} catch (URISyntaxException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) { // TODO Auto-generated catch
@@ -249,6 +250,7 @@ public class MyResource {
 				stmt = con.createStatement();
 				stmt.executeUpdate("INSERT INTO turnSetting (name, value) VALUES ('role','1') "
 						+ "ON CONFLICT (name) DO UPDATE SET value = " + "'" + role + "'");
+				seting.setSecurity(role);
 			} catch (URISyntaxException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) { // TODO Auto-generated catch
@@ -429,8 +431,11 @@ public class MyResource {
 			return "{\"error\": \"notLogin\"}";
 		}
 		Employee employee1 = EmployeeDAO.getEmployee(id);
+		if(seting.getPass() == null)
+			getSetting();
 		if(!seting.getPass().equals(pass) && !employee1.getPass().equals(pass)) {
-			return "{\"error\": \"notCorrPass\"}";
+			if(!"0".equals(seting.getSecurity()))
+				return "{\"error\": \"notCorrPass\"}";
 		}
 		if ("0".equals(over)) {
 			LocalDateTime checkOut = Instant.now().atZone(ZoneId.of("US/Central")).toLocalDateTime();
