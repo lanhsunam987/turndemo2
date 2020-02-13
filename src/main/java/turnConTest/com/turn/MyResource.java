@@ -48,7 +48,7 @@ public class MyResource {
 	HashMap<String, Employee> employee = new HashMap<String, Employee>();
 	HashMap<String, Employee> employeeT = new HashMap<String, Employee>();
 	ArrayList<ArrayList<Employee>> arrOfArrEmployee = new ArrayList<ArrayList<Employee>>();
-	public static Setting seting = new Setting();
+	public  Setting seting = new Setting();
 	//public static final int STEP_TURN = 20;
 //	public static String username;
 	public static String password;
@@ -297,7 +297,7 @@ public class MyResource {
 	}
 	
 	
-	private static void getSetting() {
+	private  void getSetting() {
 		Connection con = null;
 		Statement stmt = null;
 		try {
@@ -320,9 +320,9 @@ public class MyResource {
 				} else if ((name.equals("turn")) ) {
 					seting.setTurn(rs.getString("value"));
 				} else if ((name.equals("daily")) ) {
-					seting.setDaily(rs.getString("daily"));
+					seting.setDaily(rs.getString("value"));
 				} else if ((name.equals("weeken")) ) {
-					seting.setWeeken(rs.getString("weeken"));
+					seting.setWeeken(rs.getString("value"));
 				}
 			}
 		} catch (URISyntaxException e) { // TODO Auto-generated catch block
@@ -798,7 +798,7 @@ public class MyResource {
 			employee.put(id2, tmpe);
 	}
 
-	public static ArrayList<ArrayList<Employee>> updatePosition(ArrayList<Employee> employee) {
+	public  ArrayList<ArrayList<Employee>> updatePosition(ArrayList<Employee> employee) {
 // total 10, active 6 , inactive 4
 // Get active, inactive number
 		ArrayList<ArrayList<Employee>> arrOfArrEmployee = new ArrayList<ArrayList<Employee>>();
