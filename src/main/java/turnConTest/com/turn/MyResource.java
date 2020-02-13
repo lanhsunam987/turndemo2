@@ -404,7 +404,7 @@ public class MyResource {
 					if(Integer.parseInt(emp) > maxId)
 						maxId = Integer.parseInt(emp);
 				}
-		        addGroupSub(Integer.toString(maxId), "Comming late", Double.valueOf(diff), "0", "1", pass);
+		        addGroupSub(Integer.toString(maxId), "Comming late", Double.valueOf(diff), "0", "1", pass,"1");
 			}
 			
 			return buildJson(updatePosition(new ArrayList<Employee>(employee.values())), checkL, false);
@@ -470,11 +470,11 @@ public class MyResource {
 		} else if (checkL == 3) {
 			return "{\"error\": \"notLogin\"}";
 		}
-		return addGroupSub(id, name, money, free, over, pass);
+		return addGroupSub(id, name, money, free, over, pass, "0");
 	}
 
 	private String addGroupSub( String id, String name, double money, String free, String over,
-			String pass) {
+			String pass, String overTime) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 		Employee employee1 = EmployeeDAO.getEmployee(id);
 		if(seting.getPass() == null)
@@ -505,7 +505,7 @@ public class MyResource {
 		employee1.getTurnListD()
 				.add(new WorkHis(name, money, "1".equals(free) ? true : false, Integer.toString(index),
 						dtf.format(Instant.now().atZone(ZoneId.of("US/Central")).toLocalDateTime()),
-						dtf.format(employee1.getLstTime())));
+						"0".equals(overTime)?dtf.format(employee1.getLstTime()):null));
 		if ("0".equals(free)) {
 			employee1.setTotalTurn(employee1.getTotalTurn() + money);
 		}
