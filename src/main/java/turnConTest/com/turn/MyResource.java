@@ -763,7 +763,7 @@ public class MyResource {
 		tmpe.setPosition(Integer.parseInt(employee1.get("sortOrder").toString()));
 		try {
 			tmpe.setTotal(Double.parseDouble(employee1.get("turnAll").toString()));
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			String[] xxx = employee1.get("turnAll").toString().split("/");
 			tmpe.setTotal(Double.parseDouble(xxx[0]));
 		}
