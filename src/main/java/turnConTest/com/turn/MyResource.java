@@ -761,7 +761,12 @@ public class MyResource {
 			tmpe.setPass(employee1.get("pass").toString()); // new
 		}
 		tmpe.setPosition(Integer.parseInt(employee1.get("sortOrder").toString()));
-		tmpe.setTotal(Double.parseDouble(employee1.get("turnAll").toString()));
+		try {
+			tmpe.setTotal(Double.parseDouble(employee1.get("turnAll").toString()));
+		} catch (NumberFormatException e) {
+			String[] xxx = employee1.get("turnAll").toString().split("/");
+			tmpe.setTotal(Double.parseDouble(xxx[0]));
+		}
 		tmpe.setTotalTurn(Double.parseDouble(employee1.get("turn").toString()));
 		tmpe.setEmpName(employee1.get("name").toString());
 		tmpe.setIsWorking("1".equals(employee1.get("working").toString()) ? true : false);
